@@ -133,6 +133,12 @@ def parse_arguments() -> Any:
         dest = "config_location",
         help = "Alternative location of config file"
     )
+    parser.add_argument(
+        '--ebook',
+        dest = "ebook",
+        help = "Download ebook instead of audiobook (only for storytel)",
+        action = "store_true"
+    )
     return parser.parse_args()
 
 
