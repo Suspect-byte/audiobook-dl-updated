@@ -166,7 +166,26 @@ def download_file(args: Tuple[Audiobook, str, int, Any]) -> str:
     # Prepare download
     audiobook, output_dir, index, update_progress = args
     file = audiobook.files[index]
-    filepath, filepath_tmp = create_filepath(audiobook, output_dir, index)
+    
+    # Get original filepath
+    base_filepath, filepath_tmp = create_filepath(audiobook, output_dir, index)
+    
+    # Create unique filename if the file already exists
+    if os.path.exists(base_filepath):
+        file_dir = os.path.dirname(base_filepath)
+        file_name, file_ext = os.path.splitext(os.path.basename(base_filepath))
+        counter = 1
+        filepath = base_filepath
+        
+        while os.path.exists(filepath):
+            filepath = os.path.join(file_dir, f"{file_name} ({counter}){file_ext}")
+            counter += 1
+        
+        # Update the temporary filename as well
+        filepath_tmp = f"{filepath}.tmp"
+    else:
+        filepath = base_filepath
+    
     logging.debug(f"Starting downloading file: {file.url}")
     request = audiobook.session.get(file.url, headers=file.headers, stream=True)
     content_type: Optional[str] =  request.headers.get("Content-type", None)
@@ -184,7 +203,7 @@ def download_file(args: Tuple[Audiobook, str, int, Any]) -> str:
         logging.debug(f"expected_content_type not set by source, content-type is {content_type}, please update the source implementation")
     # Download file to tmp file
     with open(filepath_tmp, "wb") as f:
-        for chunk in request.iter_content(chunk_size=1024):
+        for chunk in request.iter_content():
             f.write(chunk)
             download_progress = len(chunk)/total_filesize
             update_progress(download_progress)
