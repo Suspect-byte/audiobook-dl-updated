@@ -1,4 +1,10 @@
-# audiobook-dl with ebook support for storytel maybe others didnt tested it yet
+# Note: This is a fork from jo1gi's repo!
+Tested only with Storytel. Others can be broken.
+## Differences to jo1gi's repo:
+- Migrated from requests to curl_cffi to workaround CloudFlare block with Storytel
+- Updated UserAgent string
+
+# audiobook-dl
 ![GitHub release](https://img.shields.io/github/v/release/jo1gi/audiobook-dl)
 ![GitHub top language](https://img.shields.io/github/languages/top/jo1gi/audiobook-dl)
 ![License](https://img.shields.io/github/license/jo1gi/audiobook-dl)
@@ -15,7 +21,7 @@ audiobook-dl currently supports downloading from the following sources:
 - [Everand (previously Scribd)](https://everand.com)
 - [Librivox](https://librivox.org)
 - [Nextory](https://nextory.com)
-- [Overdrive](https://www.overdrive.com/)
+- [Overdrive / Libby](https://www.overdrive.com/)
 - [Podimo](https://podimo.com)
 - [Saxo](https://saxo.com)
 - [Storytel](https://www.storytel.com/) / [Mofibo](https://mofibo.com)
@@ -26,18 +32,13 @@ audiobook-dl currently supports downloading from the following sources:
 ## Installation
 audiobook-dl can be installed from the repo itself or through pip.
 
-To get the newest stable version with pip run:
-```shell
-pip install audiobook-dl
-```
-
 If you want to use the newest version (can be unstable) run:
 ```shell
-pip install "git+https://github.com/jo1gi/audiobook-dl.git"
+pip install "git+https://github.com/dev-O-T/audiobook-dl.git"
 ```
 or
 ```shell
-git clone https://github.com/jo1gi/audiobook-dl.git
+git clone https://github.com/dev-O-T/audiobook-dl.git
 cd audiobook-dl
 python3 setup.py install
 ```
@@ -66,6 +67,11 @@ audiobook-dl -c <cookie file> <url>
 ```
 **Most sites require you to provide the listening page not not just the
 information page**
+
+**Storytel**
+```shell
+audiobook-dl --username <username> --password <password> <url>
+```
 
 ## Arguments
 

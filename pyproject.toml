@@ -27,6 +27,7 @@ dependencies = [
     "pycountry",
     "pycryptodome",
     "requests",
+    "curl_cffi",
     "rich",
     "tomli",
     "urllib3>=2",
