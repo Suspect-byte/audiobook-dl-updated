@@ -1,4 +1,4 @@
-# audiobook-dl
+# audiobook-dl with ebook support for storytel maybe others didnt tested it yet
 ![GitHub release](https://img.shields.io/github/v/release/jo1gi/audiobook-dl)
 ![GitHub top language](https://img.shields.io/github/languages/top/jo1gi/audiobook-dl)
 ![License](https://img.shields.io/github/license/jo1gi/audiobook-dl)
